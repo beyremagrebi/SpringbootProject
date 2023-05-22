@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template.html">
+
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>Bourse Scolaire</title>
+    <style>
+        body{
+            zoom: 80%;
+        }
+        .x{
+            transform: scale(0.9);
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container x">
+        <h2>Formulaire de demande de bourse Scolaire</h2>
+        <div class="alert alert-success" role="alert" th:if="${msg}">
+            <p th:text="${msg}"/>
+        </div>
+        <form action="sendBS" method="post">
+
+                <div class="form-group">
+                    <label class="control-label">Nom Complet :</label>
+                    <input type="text" name="nomComplet" class="form-control" th:value="${bs.nomComplet}" placeholder="Votre nom Complet"  />
+                    <span class="text-danger" th:errors="${bs.nomComplet}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">cin :</label>
+                    <input type="text" th:value="${bs.cin}" name="cin" class="form-control" placeholder="votre Carte identité"/>
+                    <span class="text-danger" th:errors="${bs.cin}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">email :</label>
+                    <input type="email" name="email" th:value="${bs.email}" class="form-control" placeholder="example@example.com"/>
+                    <span  class="text-danger" th:errors="${bs.email}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">numéro teléphone :</label>
+                    <input type="tel" name="numerotel" th:value="${bs.numerotel}" class="form-control" placeholder="votre numéro téléphone"/>
+                    <span  class="text-danger" th:errors="${bs.numerotel}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">adresse :</label>
+                    <input type="text" name="adresse" th:value="${bs.adresse}" class="form-control" placeholder="votre Adresse"/>
+                    <span  class="text-danger" th:errors="${bs.adresse}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Revenue Annuel :</label>
+                    <input type="text" name="revenuAnnuel" th:value="${bs.revenuAnnuel}" class="form-control" placeholder="Revenue Annuel"/>
+                    <span  class="text-danger" th:errors="${bs.revenuAnnuel}"> </span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary float-end">Envoyer la demande</button>
+                </div>
+            </form>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+</body>
+
+</html>

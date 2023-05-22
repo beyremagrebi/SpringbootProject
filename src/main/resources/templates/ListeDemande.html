@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="template.html">
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+    <meta charset="utf-8">
+    <title>Liste des Produits</title>
+    <script src="https://kit.fontawesome.com/b8e9726f83.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h3>List de Damndes</h3>
+
+            </div>
+            <div class="card-body">
+                <div  th:if="${msg}!=''">
+                    <span class="alert alert-secondary" role="alert"th:text="${msg}"></span>
+                </div>
+
+              <div  th:each="d:${demandes.content}" class="list-group">
+                    <a th:href="@{details(id=${d.id})}" class="list-group-item list-group-item-action mb-3" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div style="display: flex;align-items: center">
+                                <h5 class="mb-1">Bourse Scolaire</h5>
+                                <span class="badge text-bg-primary badge-primary" th:text="${d.NomComplet}"></span>
+                            </div>
+
+
+
+                            <small class="btn btn-primary "><i class="fas fa-info-circle"></i></small >
+                        </div>
+                        <p class="mb-1"></p>
+                        <small>01-04-2023</small>
+                    </a>
+                </div>
+               <!-- <table class="table table-striped">
+                    <tr>
+                        <th>ID</th><th>Nom Produit</th><th>Prix</th>
+                    </tr>
+                    <tr th:each="d:${demandes.content}">
+                        <td th:text="${d.id}"></td>
+                        <td th:text="${d.nomComplet}"></td>
+                        <td th:text="${d.cin}"></td>
+                        <td th:text="${d.email}"></td>
+                        <td th:text="${d.numerotel}"></td>
+                        <td th:text="${d.adresse}"></td>
+                        <td  ><a class="btn btn-danger" th:href="@{supprimerProduit(id=${d.id},
+page=${currentPage},size=${size})}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></td>
+                        <td ><a class="btn btn-success" th:href="@{modifierProduit(id=${d.id},
+page=${currentPage},size=${size})}">editer</a></td>
+                    </tr>
+                </table>
+                -->
+             <!--   <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                           th:href="@{ ListeProduits(page=${status.index}, size=${size} ) }"
+                           th:text="${status.index }"></a>
+                    </li>
+                </ul>-->
+              <!--  <ul class="nav nav-pills" th:if="${pages!=0}">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                           th:href="@{ ListeProduits(page=${status.index}, size=${size} ) }"
+                           th:text="${status.index }"></a>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

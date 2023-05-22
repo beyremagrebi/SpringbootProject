@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template.html">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="webjars/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <head>
+    <meta charset="UTF-8">
+    <title>Details Demande</title>
+    <script src="https://kit.fontawesome.com/b8e9726f83.js" crossorigin="anonymous"></script>
+    <style>
+  body{
+      zoom: 80%;
+  }
+  .x{
+      transform: scale(0.9);
+  }
+    </style>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container x">
+    <div class="card">
+        <div class="card-header" style="display: flex;align-items: center">
+
+                <h4>Bourse Scolaire</h4>
+                <span class="badge text-bg-primary badge-primary" th:text="${bs.Status}"></span>
+
+
+            <div class="float-right" style="color: white;margin-left: 70%" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a class="btn btn-success" th:href="@{acceptdemande(id=${bs.id})}"><i class="fas fa-check-circle"></i></a>
+                <a class="btn btn-danger" th:href="@{refusedemande(id=${bs.id})}"><i class="fas fa-times"></i></a>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="alert alert-success" role="alert" th:if="${msg}">
+                <p th:text="${msg}"/>
+            </div>
+            <form action="updateDemande" method="post"  >
+                <div class="form-group">
+
+                    <input type="hidden" name="id" class="form-control"
+                           th:value="${bs.id}"   />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nom Complet :</label>
+
+                    <input type="text" name="nomComplet" class="form-control" th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}"
+                           th:value="${bs.nomComplet}"   />
+                    <span class="text-danger" th:errors="${bs.nomComplet}"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">cin :</label>
+                    <input type="text" th:value="${bs.cin}" name="cin" class="form-control" th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}"
+                    />
+                    <span class="text-danger" th:errors="${bs.cin}"> </span>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label">email :</label>
+                    <input type="email" name="email" th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}" th:value="${bs.email}" class="form-control"/>
+                    <span  class="text-danger" th:errors="${bs.email}"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">numéro teléphone :</label>
+                    <input type="tel" name="numerotel" th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}" th:value="${bs.numerotel}" class="form-control"/>
+                    <span  class="text-danger" th:errors="${bs.numerotel}"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">adresse :</label>
+                    <input type="text" name="adresse"  th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}" th:value="${bs.adresse}" class="form-control"/>
+                    <span  class="text-danger" th:errors="${bs.adresse}"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Revenue Annuel :</label>
+                    <input type="text" th:attr="readonly=${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? 'readonly' : null}" name="revenuAnnuel" th:value="${bs.revenuAnnuel}" class="form-control"/>
+                    <span  class="text-danger" th:errors="${bs.revenuAnnuel}"> </span>
+                </div>
+                <div class="float-right" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+
+                    <a th:href="@{supprimerDemande(id=${bs.id})}" class="btn btn-danger " ><i class="fas fa-trash-alt"></i></a>
+                    <button type="submit" class="btn btn-primary "><i class="fas fa-save"></i></button>
+                </div>
+
+
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>

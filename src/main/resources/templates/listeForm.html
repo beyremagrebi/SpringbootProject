@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html">
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+  <meta charset="utf-8">
+  <title>Liste Formulaire</title>
+  <script src="https://kit.fontawesome.com/b8e9726f83.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        Filter
+        <form method="post" action="filter" style="display: flex;align-items: center">
+          <input type="text" name="nom">
+          <input type="submit" value="Go">
+        </form>
+
+
+      </div>
+      <div class="card-body">
+
+        <div th:each="f:${forms.content}" class="list-group">
+          <a th:href="@{${f.hrefForm}}" class="list-group-item list-group-item-action mb-3" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <div style="display: flex;align-items: center">
+                <h5 class="mb-1"th:text="${f.NomForm}"></h5>
+                <span class="badge text-bg-primary badge-primary"  ></span>
+              </div>
+
+
+
+              <small class="btn btn-primary "><i class="fas fa-info-circle"></i></small >
+            </div>
+            <p class="mb-1"></p>
+            <small th:text="${f.description}"></small>
+          </a>
+        </div>
+        <!-- <table class="table table-striped">
+             <tr>
+                 <th>ID</th><th>Nom Produit</th><th>Prix</th>
+             </tr>
+             <tr th:each="d:${demandes.content}">
+                 <td th:text="${d.id}"></td>
+                 <td th:text="${d.nomComplet}"></td>
+                 <td th:text="${d.cin}"></td>
+                 <td th:text="${d.email}"></td>
+                 <td th:text="${d.numerotel}"></td>
+                 <td th:text="${d.adresse}"></td>
+                 <td  ><a class="btn btn-danger" th:href="@{supprimerProduit(id=${d.id},
+page=${currentPage},size=${size})}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></td>
+                 <td ><a class="btn btn-success" th:href="@{modifierProduit(id=${d.id},
+page=${currentPage},size=${size})}">editer</a></td>
+             </tr>
+         </table>
+         -->
+        <!--   <ul class="nav nav-pills">
+               <li th:each="page,status:${pages}">
+                   <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                      th:href="@{ ListeProduits(page=${status.index}, size=${size} ) }"
+                      th:text="${status.index }"></a>
+               </li>
+           </ul>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
